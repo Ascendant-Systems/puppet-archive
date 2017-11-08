@@ -9,6 +9,7 @@ Puppet::Type.type(:archive).provide(:curl, parent: :ruby) do
     params += optional_switch(resource[:proxy_server], ['--proxy', '%s'])
     params += ['--insecure'] if resource[:allow_insecure]
     params += resource[:download_options] if resource[:download_options]
+    params += ['--noproxy'] if resource[:proxy_type] == 'none'
 
     params
   end
